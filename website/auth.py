@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, request, flash
-from sqlalchemy.sql.functions import current_user
+from sqlalchemy.sql.functions import current_user, user
 from .import db
 from .models import User
 from flask_login import login_user, logout_user, login_required, current_user
@@ -24,7 +24,7 @@ def login():
         else:
             flash('Email does not exist.', category='error')
 
-    return render_template("login.html")
+    return render_template("login.html", user=current_user)
 
 @auth.route("/sign-up", methods=['GET','POST'])
 def sign_up():
@@ -57,7 +57,7 @@ def sign_up():
             flash('User Created!', category='success')
             return redirect(url_for("views.home"))
     
-    return render_template("signup.html")
+    return render_template("signup.html", user=current_user)
 
 @auth.route("/logout")
 @login_required
