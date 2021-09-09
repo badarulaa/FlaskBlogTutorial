@@ -1,6 +1,3 @@
-from enum import unique
-from sqlalchemy.orm import backref
-
 from sqlalchemy.sql.expression import false
 from . import db
 from flask_login import UserMixin
